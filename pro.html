@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Validator</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 1);
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+        }
+        h1, h2, h4 {
+            color: rgba(128, 128, 128, 1);
+        }
+        input {
+            padding: 5px;
+        }
+        button {
+            padding: 5px;
+            background-color: rgba(128, 128, 128, 1);
+            color: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(255, 255, 255, 1);
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgba(0, 0, 0, 1);
+            color: rgba(128, 128, 128, 1);
+            border: 1px solid rgba(128, 128, 128, 1);
+        }
+        ul {
+            color: rgba(128, 128, 128, 1);
+            line-height: 23px;   
+            font-size: 18px;
+            display: inline-block;
+            text-align: left;
+            margin: 0;
+        }
+        #valid {
+            color: rgba(227, 63, 32, 1);
+        }
+        #invalid {
+            color: rgba(47, 102, 16, 1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Password Validator</h1>
+    <hr>
+    <h2>Enter Password</h2>
+    <input id="password" type="password" placeholder="Enter password...">
+    <button id="validateButton">Validate Password</button>
+    <p id="valid"></p>
+    <p id="invalid"></p>
+    <h4>Instructions:</h4>
+    <ul>
+        <li>Password must contain at least one uppercase letter.</li>
+        <li>Password must contain at least one lowercase letter.</li>
+        <li>Password must contain at least one digit.</li>
+        <li>Password must contain at least one symbol.</li>
+        <li>Password minimum length should be 8.</li>
+        <li>Password maximum length should be 50.</li>
+    </ul>
+    <script>
+        const validateButton = document.getElementById('validateButton');
+        const validParagraph = document.getElementById('valid');
+        const invalidParagraph = document.getElementById('invalid');
+        validateButton.addEventListener('click', () => {
+            const passwordInput = document.getElementById('password').value;
+            if (!passwordInput) {
+                invalidParagraph.textContent = '';
+                validParagraph.textContent = 'Please enter password.';
+            } else {
+                const isValid = validatePassword(passwordInput);
+                if (isValid) {
+                    invalidParagraph.textContent = '';
+                    validParagraph.textContent = 'Congratulations! Password is valid.';
+                } else {
+                    validParagraph.textContent = '';
+                    invalidParagraph.textContent = '!Password length must be between 8 and 50 and must contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.';
+                }
+            }
+        });
+        function validatePassword(password) {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,50}$/;
+            return regex.test(password);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
